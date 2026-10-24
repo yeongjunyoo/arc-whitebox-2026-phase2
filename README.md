@@ -3,7 +3,7 @@
 A learned corrector that reads the engine's cross-neuron terms, saturation-aware compute and a free fourth-cumulant
 fold on factored cumulant propagation at width 1024. Phase 2 submission 336955 by Yeongjun Yoo (AIcrowd `yeongjunyoo`).
 
-The write-up is `WRITEUP.md`, the same text as `WRITEUP.pdf` (the PDF submitted for the algorithmic-contribution prize and posted on the challenge forum). This repository holds the
+The write-up is `WRITEUP.md`, the same text as `WRITEUP.pdf` (the PDF submitted for the algorithmic-contribution prize and posted on the challenge forum: https://discourse.aicrowd.com/t/18284). This repository holds the
 graded files, the code that trained the corrector, and the harness and raw results behind every number in the
 write-up's ablation tables. The paths are those of our working tree, so every script runs as it ran for us.
 Our final designated submission, 337488, is 336955 plus three later changes (write-up sections 7.3 and 7.6); its
