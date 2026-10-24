@@ -1,0 +1,166 @@
+{
+ "base": "estimators/r38/r38_sub_x100_s2",
+ "base_sha256": {
+  "estimator.py": "0d69dc7d0f85065c1c657696c157457b3e208e63f9decf4e7e6d83039c8a5dee",
+  "wmsg.npz": "7438a1b7543a63a03a5abd51799cb1b0bf389723d6f9637acc7295904aa17fa2"
+ },
+ "make_variants_sha256": "aa3490d5dfd7b78e05f30b4dc31c761541b366bf47df06c6474ea4f7efce0d93",
+ "builds": {
+  "v_engine": {
+   "replacements": [
+    {
+     "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+     "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+    },
+    {
+     "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+     "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+    }
+   ],
+   "sha256": {
+    "estimator.py": "8f3df5232a3314384ca53489f6885c3cda1165fba6d68f75988648aef4a31623",
+    "wmsg.npz": "7438a1b7543a63a03a5abd51799cb1b0bf389723d6f9637acc7295904aa17fa2"
+   }
+  },
+  "v_engine_nott": {
+   "replacements": [
+    {
+     "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+     "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+    },
+    {
+     "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+     "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+    },
+    {
+     "old": "^_SAT_BINS = ",
+     "new": "_SAT_BINS = {\"push\": {\"11\": [0.9375, 0.96875], \"12\": [0.9375, 0.96875], \"13\": [0.9375, 0.96875], \"14\": [0.90625, 0.96875]}, \"tt\": {}, \"skip_plain\": [[\"push\", 11], [\"push\", 12], [\"push\", 13], [\"push\", 14]]}  # write-up variant: no restricted tt shapes"
+    },
+    {
+     "old": "_R25B['kc'] = 'A'",
+     "new": "_R25B['kc'] = 'A'; _R25B.pop('s7')"
+    }
+   ],
+   "sha256": {
+    "estimator.py": "43e0497c5bbf97d8853f36db13ebc03e818c21a2bcfdf03221a4b2305188835e",
+    "wmsg.npz": "7438a1b7543a63a03a5abd51799cb1b0bf389723d6f9637acc7295904aa17fa2"
+   }
+  },
+  "v_engine_nos7": {
+   "replacements": [
+    {
+     "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+     "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+    },
+    {
+     "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+     "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+    },
+    {
+     "old": "_R25B['kc'] = 'A'",
+     "new": "_R25B['kc'] = 'A'; _R25B.pop('s7')"
+    }
+   ],
+   "sha256": {
+    "estimator.py": "e375e7851e4678086a0351ace2cdd266af33d226c0b3cdbe3ef5fa2c50fa7691",
+    "wmsg.npz": "7438a1b7543a63a03a5abd51799cb1b0bf389723d6f9637acc7295904aa17fa2"
+   }
+  },
+  "mech_prod": {
+   "replacements": [
+    {
+     "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+     "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+    },
+    {
+     "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+     "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+    },
+    {
+     "old": "    def _ns(name):\n        return contextlib.nullcontext()\n",
+     "new": "    def _ns(name):\n        return contextlib.nullcontext()\n\n_MECH = None  # research/wu/mech: hook object set by mech_run.py (None: this file computes as its base)\n"
+    },
+    {
+     "old": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n",
+     "new": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n                            if _MECH is not None:  # mech: the fold's share of 3 T^T from the live legs\n                                _MECH.fold(t, h_, g_, QF, mc, ns)\n"
+    },
+    {
+     "old": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n",
+     "new": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n                        if _MECH is not None:  # mech: record and (by mode) replace entries of 3 T^T\n                            _MECH.tt(t, M1, a, Pa, Pb, ord_t, ordb_t, mc, ns,\n                                     (Lr, Ar) if RIt_ is not None else (LEGt[lo:T0 + 2 * ns * n], ASt[lo:T0 + 2 * ns * n]),\n                                     (LEGt[:nth], ASt[:nth]), DGF if K4F is not None else None)\n"
+    }
+   ],
+   "sha256": {
+    "estimator.py": "716152834c44b8e02945372728f0857fed68f6f8b008d62bf34a965de02a7baa",
+    "wmsg.npz": "7438a1b7543a63a03a5abd51799cb1b0bf389723d6f9637acc7295904aa17fa2"
+   }
+  },
+  "mech_nott": {
+   "replacements": [
+    {
+     "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+     "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+    },
+    {
+     "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+     "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+    },
+    {
+     "old": "^_SAT_BINS = ",
+     "new": "_SAT_BINS = {\"push\": {\"11\": [0.9375, 0.96875], \"12\": [0.9375, 0.96875], \"13\": [0.9375, 0.96875], \"14\": [0.90625, 0.96875]}, \"tt\": {}, \"skip_plain\": [[\"push\", 11], [\"push\", 12], [\"push\", 13], [\"push\", 14]]}  # write-up variant: no restricted tt shapes"
+    },
+    {
+     "old": "_R25B['kc'] = 'A'",
+     "new": "_R25B['kc'] = 'A'; _R25B.pop('s7')"
+    },
+    {
+     "old": "    def _ns(name):\n        return contextlib.nullcontext()\n",
+     "new": "    def _ns(name):\n        return contextlib.nullcontext()\n\n_MECH = None  # research/wu/mech: hook object set by mech_run.py (None: this file computes as its base)\n"
+    },
+    {
+     "old": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n",
+     "new": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n                            if _MECH is not None:  # mech: the fold's share of 3 T^T from the live legs\n                                _MECH.fold(t, h_, g_, QF, mc, ns)\n"
+    },
+    {
+     "old": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n",
+     "new": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n                        if _MECH is not None:  # mech: record and (by mode) replace entries of 3 T^T\n                            _MECH.tt(t, M1, a, Pa, Pb, ord_t, ordb_t, mc, ns,\n                                     (Lr, Ar) if RIt_ is not None else (LEGt[lo:T0 + 2 * ns * n], ASt[lo:T0 + 2 * ns * n]),\n                                     (LEGt[:nth], ASt[:nth]), DGF if K4F is not None else None)\n"
+    }
+   ],
+   "sha256": {
+    "estimator.py": "adff63b8f7575eb2b662dc5f0fa77b2398e3dcf2916feddafaddd10ce90a57d1",
+    "wmsg.npz": "7438a1b7543a63a03a5abd51799cb1b0bf389723d6f9637acc7295904aa17fa2"
+   }
+  },
+  "mech_nos7": {
+   "replacements": [
+    {
+     "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+     "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+    },
+    {
+     "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+     "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+    },
+    {
+     "old": "_R25B['kc'] = 'A'",
+     "new": "_R25B['kc'] = 'A'; _R25B.pop('s7')"
+    },
+    {
+     "old": "    def _ns(name):\n        return contextlib.nullcontext()\n",
+     "new": "    def _ns(name):\n        return contextlib.nullcontext()\n\n_MECH = None  # research/wu/mech: hook object set by mech_run.py (None: this file computes as its base)\n"
+    },
+    {
+     "old": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n",
+     "new": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n                            if _MECH is not None:  # mech: the fold's share of 3 T^T from the live legs\n                                _MECH.fold(t, h_, g_, QF, mc, ns)\n"
+    },
+    {
+     "old": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n",
+     "new": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n                        if _MECH is not None:  # mech: record and (by mode) replace entries of 3 T^T\n                            _MECH.tt(t, M1, a, Pa, Pb, ord_t, ordb_t, mc, ns,\n                                     (Lr, Ar) if RIt_ is not None else (LEGt[lo:T0 + 2 * ns * n], ASt[lo:T0 + 2 * ns * n]),\n                                     (LEGt[:nth], ASt[:nth]), DGF if K4F is not None else None)\n"
+    }
+   ],
+   "sha256": {
+    "estimator.py": "170d1101461d73ae3a093b22eb5fd82d438901bc93b9ac16f8e86145a6c774c2",
+    "wmsg.npz": "7438a1b7543a63a03a5abd51799cb1b0bf389723d6f9637acc7295904aa17fa2"
+   }
+  }
+ }
+}

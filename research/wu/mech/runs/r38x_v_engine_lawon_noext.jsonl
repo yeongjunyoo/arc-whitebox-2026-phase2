@@ -1,0 +1,1 @@
+{"set": "mini", "mlp_id": 0, "name": "logan-fitzgerald", "final_mse": 2.131680415694445e-08, "flops": 322977183496, "C_over_B": 0.14687301859157742, "adjusted": 3.130863373255917e-09, "wall_s": 27.74, "residual_s": 0.1261, "op_calls": 14930, "finite": true, "pred_sha16": "63fe5f85a7e185fd"}

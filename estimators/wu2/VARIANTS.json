@@ -1,0 +1,285 @@
+{
+ "base": "k3_fast_aug_sc_2l_b_lc2k_rd_wm_ex35_satrole_fbv8_rsw_cf_sp_d6p_sb2_dc20x_r143bcxa8tv_r24wc10_r25ak4f10L_gA_r25ces_r25bc3e7x_r25agf05_r25aqx_r25av2a_opb30a15_r25av4kd05s3_opi175_opkcA_opslcs_opr30",
+ "base_sha256": {
+  "estimator.py": "f908afd327e6f22e67b254989d9240f98acf58510168f9ff8d83051fff0cb942",
+  "wmsg.npz": "46bb22a1171552d81c9e9266b403882321ad9039291163c650087a48d0eaf30b"
+ },
+ "variants": {
+  "v_engine": {
+   "replacements": [
+    {
+     "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+     "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+    },
+    {
+     "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+     "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+    }
+   ],
+   "sha256": {
+    "estimator.py": "60fd051f4b4613fe954cc380555782d9db76eebf4ed0d10b29e3a5551200dca5",
+    "wmsg.npz": "46bb22a1171552d81c9e9266b403882321ad9039291163c650087a48d0eaf30b"
+   }
+  },
+  "v_engine_nostar": {
+   "replacements": [
+    {
+     "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+     "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+    },
+    {
+     "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+     "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+    },
+    {
+     "old": "_K4F = {'scale': 1.0, 'live': True}",
+     "new": "_K4F = {'scale': None, 'live': True}"
+    },
+    {
+     "old": "_GF = {'scale': 0.5}",
+     "new": "_GF = {'scale': None}"
+    }
+   ],
+   "sha256": {
+    "estimator.py": "c428165a7a1aab2b0a473758510a882d0a2169767ce944491620544c8424a9fd",
+    "wmsg.npz": "46bb22a1171552d81c9e9266b403882321ad9039291163c650087a48d0eaf30b"
+   }
+  },
+  "v_engine_nolaw": {
+   "replacements": [
+    {
+     "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+     "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+    },
+    {
+     "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+     "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+    },
+    {
+     "old": "def __init__(self, dtype=None, force_aug: bool = False, lam=None, age=6,",
+     "new": "def __init__(self, dtype=None, force_aug: bool = False, lam=(0.0,) * 16, age=6,"
+    }
+   ],
+   "sha256": {
+    "estimator.py": "74089ea9f92be89e6a87c9c229790f6926bf6e691545f5e0cf9b11d650d403ba",
+    "wmsg.npz": "46bb22a1171552d81c9e9266b403882321ad9039291163c650087a48d0eaf30b"
+   }
+  },
+  "v_engine_nok4f": {
+   "replacements": [
+    {
+     "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+     "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+    },
+    {
+     "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+     "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+    },
+    {
+     "old": "_K4F = {'scale': 1.0, 'live': True}",
+     "new": "_K4F = {'scale': None, 'live': True}"
+    }
+   ],
+   "sha256": {
+    "estimator.py": "1c1fe1474b8a5fdcb1f7772c1cf60329a86ef1f233d0ae67f5199d452d4e335a",
+    "wmsg.npz": "46bb22a1171552d81c9e9266b403882321ad9039291163c650087a48d0eaf30b"
+   }
+  },
+  "v_engine_nogf": {
+   "replacements": [
+    {
+     "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+     "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+    },
+    {
+     "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+     "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+    },
+    {
+     "old": "_GF = {'scale': 0.5}",
+     "new": "_GF = {'scale': None}"
+    }
+   ],
+   "sha256": {
+    "estimator.py": "5d3ec38925fba3012736c476eb2375088334d398a2549f785778aa8c98f221bd",
+    "wmsg.npz": "46bb22a1171552d81c9e9266b403882321ad9039291163c650087a48d0eaf30b"
+   }
+  },
+  "v_nostar": {
+   "replacements": [
+    {
+     "old": "_K4F = {'scale': 1.0, 'live': True}",
+     "new": "_K4F = {'scale': None, 'live': True}"
+    },
+    {
+     "old": "_GF = {'scale': 0.5}",
+     "new": "_GF = {'scale': None}"
+    }
+   ],
+   "sha256": {
+    "estimator.py": "40206d62b1eac82d2789bbf287acc8bf665be015b2f2b4a82e9bdac361ccf899",
+    "wmsg.npz": "46bb22a1171552d81c9e9266b403882321ad9039291163c650087a48d0eaf30b"
+   }
+  },
+  "v_noapa": {
+   "replacements": [
+    {
+     "old": "_APA_ORI = {'tt': '232', 'push': '322'}",
+     "new": "_APA_ORI = {}"
+    }
+   ],
+   "sha256": {
+    "estimator.py": "7b867b9bd40b938f0991a9c2df7b34a0f0f6e5d1e0791d70202bf211d01c5480",
+    "wmsg.npz": "46bb22a1171552d81c9e9266b403882321ad9039291163c650087a48d0eaf30b"
+   }
+  },
+  "v_engine_nosat": {
+   "replacements": [
+    {
+     "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+     "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+    },
+    {
+     "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+     "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+    },
+    {
+     "old": "^_SAT_BINS = ",
+     "new": "_SAT_BINS = {\"push\": {}, \"tt\": {}, \"skip_plain\": []}  # write-up variant: no restricted shapes"
+    },
+    {
+     "old": "_DC = {'theta': '2.0', 'gather': True}",
+     "new": "_DC = {'theta': None, 'gather': True}"
+    },
+    {
+     "old": "_R25B['kc'] = 'A'",
+     "new": "_R25B['kc'] = None; [_R25B.pop(k_) for k_ in ('s1', 's8', 's2', 's7')]"
+    }
+   ],
+   "sha256": {
+    "estimator.py": "17651f5b319f5ba2e2a9ae97be709462756ad4fe04b4e3477d97f66ceb13f86f",
+    "wmsg.npz": "46bb22a1171552d81c9e9266b403882321ad9039291163c650087a48d0eaf30b"
+   }
+  },
+  "v_engine_nodc": {
+   "replacements": [
+    {
+     "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+     "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+    },
+    {
+     "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+     "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+    },
+    {
+     "old": "_DC = {'theta': '2.0', 'gather': True}",
+     "new": "_DC = {'theta': None, 'gather': True}"
+    }
+   ],
+   "sha256": {
+    "estimator.py": "6c6b35e222198eecf2f6276ec4a52c9325b68823faab05fc3a4dd35e412976a6",
+    "wmsg.npz": "46bb22a1171552d81c9e9266b403882321ad9039291163c650087a48d0eaf30b"
+   }
+  },
+  "v_engine_nokc": {
+   "replacements": [
+    {
+     "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+     "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+    },
+    {
+     "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+     "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+    },
+    {
+     "old": "_R25B['kc'] = 'A'",
+     "new": "_R25B['kc'] = None"
+    }
+   ],
+   "sha256": {
+    "estimator.py": "52b3583deea04e407c33ec3d06177e63672a693634031a4cfb994d4712d0747f",
+    "wmsg.npz": "46bb22a1171552d81c9e9266b403882321ad9039291163c650087a48d0eaf30b"
+   }
+  },
+  "v_engine_noshape": {
+   "replacements": [
+    {
+     "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+     "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+    },
+    {
+     "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+     "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+    },
+    {
+     "old": "^_SAT_BINS = ",
+     "new": "_SAT_BINS = {\"push\": {}, \"tt\": {}, \"skip_plain\": []}  # write-up variant: no restricted shapes"
+    },
+    {
+     "old": "_R25B['kc'] = 'A'",
+     "new": "_R25B['kc'] = 'A'; [_R25B.pop(k_) for k_ in ('s1', 's8', 's2', 's7')]"
+    }
+   ],
+   "sha256": {
+    "estimator.py": "fd158045856d90d56375bd63412cb1d71330895247506137a1e47ec0e8284159",
+    "wmsg.npz": "46bb22a1171552d81c9e9266b403882321ad9039291163c650087a48d0eaf30b"
+   }
+  },
+  "v_notaps": {
+   "replacements": [
+    {
+     "old": "QXON = _QX.get('on') and K4F is not None and GF is not None",
+     "new": "QXON = False  # write-up variant: no taps"
+    }
+   ],
+   "sha256": {
+    "estimator.py": "e1db9238def507f65215cddc4fe4dc083f5cb7fb3429aabcfc1257c4a0bb2e57",
+    "wmsg.npz": "46bb22a1171552d81c9e9266b403882321ad9039291163c650087a48d0eaf30b"
+   }
+  },
+  "v_engine_notaps": {
+   "replacements": [
+    {
+     "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+     "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+    },
+    {
+     "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+     "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+    },
+    {
+     "old": "QXON = _QX.get('on') and K4F is not None and GF is not None",
+     "new": "QXON = False  # write-up variant: no taps"
+    }
+   ],
+   "sha256": {
+    "estimator.py": "222cfc632984d1d1f6a56bc185b605893f7f6f1860c87c9cedc30d9e91347c31",
+    "wmsg.npz": "46bb22a1171552d81c9e9266b403882321ad9039291163c650087a48d0eaf30b"
+   }
+  },
+  "v_tapsnofold": {
+   "replacements": [
+    {
+     "old": "fnp.add(ah_, es(\"sji,sji,x->sji\", QF, g_, c_three), out=ah_)  # + 3 s w31 lam G H^2",
+     "new": "pass  # write-up variant: made for the taps, not added"
+    },
+    {
+     "old": "fnp.add(ag_, mul(QF, h_), out=ag_)  # + s w31 lam H^3",
+     "new": "pass  # write-up variant: made for the taps, not added"
+    },
+    {
+     "old": "fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))",
+     "new": "pass  # write-up variant: no fold to take out"
+    },
+    {
+     "old": "fnp.add(Gd_, Xf_, out=Gd_)",
+     "new": "pass  # write-up variant: the G increment made for the taps, not added"
+    }
+   ],
+   "sha256": {
+    "estimator.py": "7437eb0713aba8053b8cde29e9164aa518e906b162d62e9f013af4aff2666d92",
+    "wmsg.npz": "46bb22a1171552d81c9e9266b403882321ad9039291163c650087a48d0eaf30b"
+   }
+  }
+ }
+}

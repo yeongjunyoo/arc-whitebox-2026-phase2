@@ -1,0 +1,6 @@
+seed 1: best mini 44-49 ratio vs the engine None
+seed 2: best mini 44-49 ratio vs the engine None
+seed 3: best mini 44-49 ratio vs the engine None
+seed 1: best mini 44-49 ratio vs the engine 0.7893174530960778
+seed 2: best mini 44-49 ratio vs the engine 0.788334478543457
+seed 3: best mini 44-49 ratio vs the engine 0.7941944483759567

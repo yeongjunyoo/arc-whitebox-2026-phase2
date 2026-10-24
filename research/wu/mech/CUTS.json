@@ -1,0 +1,777 @@
+{
+ "make_variants_sha256": "aa3490d5dfd7b78e05f30b4dc31c761541b366bf47df06c6474ea4f7efce0d93",
+ "make_mech_sha256": "974a7f196c60b88dd412b6e216b1e4cc47e9546022758eb23d965ac09ea39c7d",
+ "est_opr30/mech_prod": {
+  "from": "estimators/wu2/v_engine",
+  "from_sha256": "60fd051f4b4613fe954cc380555782d9db76eebf4ed0d10b29e3a5551200dca5",
+  "replacements": [
+   {
+    "old": "    def _ns(name):\n        return contextlib.nullcontext()\n",
+    "new": "    def _ns(name):\n        return contextlib.nullcontext()\n\n_MECH = None  # research/wu/mech: hook object set by mech_run.py (None: this file computes as its base)\n"
+   },
+   {
+    "old": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n",
+    "new": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n                            if _MECH is not None:  # mech: the fold's share of 3 T^T from the live legs\n                                _MECH.fold(t, h_, g_, QF, mc, ns)\n"
+   },
+   {
+    "old": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n",
+    "new": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n                        if _MECH is not None:  # mech: record and (by mode) replace entries of 3 T^T\n                            _MECH.tt(t, M1, a, Pa, Pb, ord_t, ordb_t, mc, ns,\n                                     (Lr, Ar) if RIt_ is not None else (LEGt[lo:T0 + 2 * ns * n], ASt[lo:T0 + 2 * ns * n]),\n                                     (LEGt[:nth], ASt[:nth]), DGF if K4F is not None else None)\n"
+   }
+  ],
+  "sha256": "ae7d0a817cc53ec4628a80f7f6f7b00d457caf9bf224ca944b7bf4f4596d7558"
+ },
+ "est_opr30/mech_nott": {
+  "from": "estimators/wu2/v_engine_nott",
+  "from_sha256": "e4751c6d711803d32246e5e4171f506f655795fd193b633f4758feb467524b1d",
+  "replacements": [
+   {
+    "old": "    def _ns(name):\n        return contextlib.nullcontext()\n",
+    "new": "    def _ns(name):\n        return contextlib.nullcontext()\n\n_MECH = None  # research/wu/mech: hook object set by mech_run.py (None: this file computes as its base)\n"
+   },
+   {
+    "old": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n",
+    "new": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n                            if _MECH is not None:  # mech: the fold's share of 3 T^T from the live legs\n                                _MECH.fold(t, h_, g_, QF, mc, ns)\n"
+   },
+   {
+    "old": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n",
+    "new": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n                        if _MECH is not None:  # mech: record and (by mode) replace entries of 3 T^T\n                            _MECH.tt(t, M1, a, Pa, Pb, ord_t, ordb_t, mc, ns,\n                                     (Lr, Ar) if RIt_ is not None else (LEGt[lo:T0 + 2 * ns * n], ASt[lo:T0 + 2 * ns * n]),\n                                     (LEGt[:nth], ASt[:nth]), DGF if K4F is not None else None)\n"
+   }
+  ],
+  "sha256": "e25df568a2df453b9429ccfb767e6cb2a1048fa97391fc96c1fe8fbe41a3d6bb"
+ },
+ "est_r37/v_engine": {
+  "from": "estimators/k3_fast_aug_sc_2l_b_lc2k_rd_wm_ex35_satrole_fbv8_rsw_cf_sp_d6p_sb2_dc20x_r143bcxa8tv_r24wc10_r25ak4f10L_gA_r25ces_r25bc3e7x_r25agf05_r25aqx_r25av2a_opb30a15_r25av4kd05s3_opi175_opkcA_opslcs_opr30_r36k256_opL4",
+  "from_sha256": "5cce4128344b6e4a47e03f79beac448d217fbe74b7c6d41ccb98ebe9fdb14277",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   }
+  ],
+  "sha256": "35f57a1387fb7f194a7e84e72292a118245cd4ec18809be76adbe275b7ed81b8"
+ },
+ "est_r37/v_engine_nott": {
+  "from": "estimators/k3_fast_aug_sc_2l_b_lc2k_rd_wm_ex35_satrole_fbv8_rsw_cf_sp_d6p_sb2_dc20x_r143bcxa8tv_r24wc10_r25ak4f10L_gA_r25ces_r25bc3e7x_r25agf05_r25aqx_r25av2a_opb30a15_r25av4kd05s3_opi175_opkcA_opslcs_opr30_r36k256_opL4",
+  "from_sha256": "5cce4128344b6e4a47e03f79beac448d217fbe74b7c6d41ccb98ebe9fdb14277",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   },
+   {
+    "old": "^_SAT_BINS = ",
+    "new": "_SAT_BINS = {\"push\": {\"11\": [0.9375, 0.96875], \"12\": [0.9375, 0.96875], \"13\": [0.9375, 0.96875], \"14\": [0.90625, 0.96875]}, \"tt\": {}, \"skip_plain\": [[\"push\", 11], [\"push\", 12], [\"push\", 13], [\"push\", 14]]}  # write-up variant: no restricted tt shapes"
+   },
+   {
+    "old": "_R25B['kc'] = 'A'",
+    "new": "_R25B['kc'] = 'A'; _R25B.pop('s7')"
+   }
+  ],
+  "sha256": "e82fa8d83d6ce2c4e8663579e4ffd57c1525b0edf80d150ccec6602eff2433d8"
+ },
+ "est_r37/v_engine equals estimators/r38/r38_eng_base": true,
+ "est_r38x/v_engine_lawon": {
+  "from": "estimators/r38/r38_sub_x100_s2",
+  "from_sha256": "0d69dc7d0f85065c1c657696c157457b3e208e63f9decf4e7e6d83039c8a5dee",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   },
+   {
+    "old": "LMK4 = fnp.array([[1.0], [1.0], [0.0], [0.0]], dtype=f32)  # r38: lam' rows out of the engine's VEC",
+    "new": "LMK4 = fnp.array([[1.0], [1.0], [1.0], [1.0]], dtype=f32)  # mech: lam' rows back in the engine's VEC"
+   },
+   {
+    "old": "LMK6 = fnp.array([[1.0], [1.0], [0.0], [0.0], [1.0], [1.0]], dtype=f32)",
+    "new": "LMK6 = fnp.array([[1.0], [1.0], [1.0], [1.0], [1.0], [1.0]], dtype=f32)  # mech: lam' rows back in"
+   }
+  ],
+  "sha256": "47cce63006f8bd9057fee0b16d7edfafa9f427210d132fed77f54a8e0205e952"
+ },
+ "est_r38x/v_engine_nott_lawon": {
+  "from": "estimators/r38/r38_sub_x100_s2",
+  "from_sha256": "0d69dc7d0f85065c1c657696c157457b3e208e63f9decf4e7e6d83039c8a5dee",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   },
+   {
+    "old": "^_SAT_BINS = ",
+    "new": "_SAT_BINS = {\"push\": {\"11\": [0.9375, 0.96875], \"12\": [0.9375, 0.96875], \"13\": [0.9375, 0.96875], \"14\": [0.90625, 0.96875]}, \"tt\": {}, \"skip_plain\": [[\"push\", 11], [\"push\", 12], [\"push\", 13], [\"push\", 14]]}  # write-up variant: no restricted tt shapes"
+   },
+   {
+    "old": "_R25B['kc'] = 'A'",
+    "new": "_R25B['kc'] = 'A'; _R25B.pop('s7')"
+   },
+   {
+    "old": "LMK4 = fnp.array([[1.0], [1.0], [0.0], [0.0]], dtype=f32)  # r38: lam' rows out of the engine's VEC",
+    "new": "LMK4 = fnp.array([[1.0], [1.0], [1.0], [1.0]], dtype=f32)  # mech: lam' rows back in the engine's VEC"
+   },
+   {
+    "old": "LMK6 = fnp.array([[1.0], [1.0], [0.0], [0.0], [1.0], [1.0]], dtype=f32)",
+    "new": "LMK6 = fnp.array([[1.0], [1.0], [1.0], [1.0], [1.0], [1.0]], dtype=f32)  # mech: lam' rows back in"
+   }
+  ],
+  "sha256": "9173efc2d8013b0a4c2f8d7aa72a05e070fa3b125136e232eee84e4980c77336"
+ },
+ "est_r38x/v_engine_noext": {
+  "from": "estimators/r38/r38_sub_x100_s2",
+  "from_sha256": "0d69dc7d0f85065c1c657696c157457b3e208e63f9decf4e7e6d83039c8a5dee",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   },
+   {
+    "old": "_X38 = {'on': True,",
+    "new": "_X38 = {'on': False,"
+   }
+  ],
+  "sha256": "ac94289022e995f40fed1f4a6d1636b706e9105471532add9cfabd3687757d90"
+ },
+ "est_r38x/v_engine_nott_noext": {
+  "from": "estimators/r38/r38_sub_x100_s2",
+  "from_sha256": "0d69dc7d0f85065c1c657696c157457b3e208e63f9decf4e7e6d83039c8a5dee",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   },
+   {
+    "old": "^_SAT_BINS = ",
+    "new": "_SAT_BINS = {\"push\": {\"11\": [0.9375, 0.96875], \"12\": [0.9375, 0.96875], \"13\": [0.9375, 0.96875], \"14\": [0.90625, 0.96875]}, \"tt\": {}, \"skip_plain\": [[\"push\", 11], [\"push\", 12], [\"push\", 13], [\"push\", 14]]}  # write-up variant: no restricted tt shapes"
+   },
+   {
+    "old": "_R25B['kc'] = 'A'",
+    "new": "_R25B['kc'] = 'A'; _R25B.pop('s7')"
+   },
+   {
+    "old": "_X38 = {'on': True,",
+    "new": "_X38 = {'on': False,"
+   }
+  ],
+  "sha256": "ffeb0a3cc6093d64812d33e71f8a06443216ddf9937417021b519ee56036fd03"
+ },
+ "est_r38x/v_engine_lawon_noext": {
+  "from": "estimators/r38/r38_sub_x100_s2",
+  "from_sha256": "0d69dc7d0f85065c1c657696c157457b3e208e63f9decf4e7e6d83039c8a5dee",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   },
+   {
+    "old": "LMK4 = fnp.array([[1.0], [1.0], [0.0], [0.0]], dtype=f32)  # r38: lam' rows out of the engine's VEC",
+    "new": "LMK4 = fnp.array([[1.0], [1.0], [1.0], [1.0]], dtype=f32)  # mech: lam' rows back in the engine's VEC"
+   },
+   {
+    "old": "LMK6 = fnp.array([[1.0], [1.0], [0.0], [0.0], [1.0], [1.0]], dtype=f32)",
+    "new": "LMK6 = fnp.array([[1.0], [1.0], [1.0], [1.0], [1.0], [1.0]], dtype=f32)  # mech: lam' rows back in"
+   },
+   {
+    "old": "_X38 = {'on': True,",
+    "new": "_X38 = {'on': False,"
+   }
+  ],
+  "sha256": "2ccdc4294f6e54f78f3d106ee71ec89a369c3c6e56d2926d314d653acdd0b8dc"
+ },
+ "est_r38x/v_engine_nott_lawon_noext": {
+  "from": "estimators/r38/r38_sub_x100_s2",
+  "from_sha256": "0d69dc7d0f85065c1c657696c157457b3e208e63f9decf4e7e6d83039c8a5dee",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   },
+   {
+    "old": "^_SAT_BINS = ",
+    "new": "_SAT_BINS = {\"push\": {\"11\": [0.9375, 0.96875], \"12\": [0.9375, 0.96875], \"13\": [0.9375, 0.96875], \"14\": [0.90625, 0.96875]}, \"tt\": {}, \"skip_plain\": [[\"push\", 11], [\"push\", 12], [\"push\", 13], [\"push\", 14]]}  # write-up variant: no restricted tt shapes"
+   },
+   {
+    "old": "_R25B['kc'] = 'A'",
+    "new": "_R25B['kc'] = 'A'; _R25B.pop('s7')"
+   },
+   {
+    "old": "LMK4 = fnp.array([[1.0], [1.0], [0.0], [0.0]], dtype=f32)  # r38: lam' rows out of the engine's VEC",
+    "new": "LMK4 = fnp.array([[1.0], [1.0], [1.0], [1.0]], dtype=f32)  # mech: lam' rows back in the engine's VEC"
+   },
+   {
+    "old": "LMK6 = fnp.array([[1.0], [1.0], [0.0], [0.0], [1.0], [1.0]], dtype=f32)",
+    "new": "LMK6 = fnp.array([[1.0], [1.0], [1.0], [1.0], [1.0], [1.0]], dtype=f32)  # mech: lam' rows back in"
+   },
+   {
+    "old": "_X38 = {'on': True,",
+    "new": "_X38 = {'on': False,"
+   }
+  ],
+  "sha256": "a6c4f30fa9eff41993d1b0ae4b51e4192995762ce214011e0bf6b623da5e24fa"
+ },
+ "est_r38x/v_engine_noxc": {
+  "from": "estimators/r38/r38_sub_x100_s2",
+  "from_sha256": "0d69dc7d0f85065c1c657696c157457b3e208e63f9decf4e7e6d83039c8a5dee",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   },
+   {
+    "old": "                        fnp.subtract(Cv, fnp.outer(m_, fnp.multiply(m_, eps_)), out=Cv)\n                        mul(Cv, 1.0 / (1.0 + eps_), out=Cv)\n",
+    "new": "                        pass  # mech: the extraction's C' part off\n"
+   }
+  ],
+  "sha256": "3a6e7e733cd4b66ae3b66f5cbc9a34c1545caee63630ceb2616cc079b54d3ffc"
+ },
+ "est_r38x/v_engine_nott_noxc": {
+  "from": "estimators/r38/r38_sub_x100_s2",
+  "from_sha256": "0d69dc7d0f85065c1c657696c157457b3e208e63f9decf4e7e6d83039c8a5dee",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   },
+   {
+    "old": "^_SAT_BINS = ",
+    "new": "_SAT_BINS = {\"push\": {\"11\": [0.9375, 0.96875], \"12\": [0.9375, 0.96875], \"13\": [0.9375, 0.96875], \"14\": [0.90625, 0.96875]}, \"tt\": {}, \"skip_plain\": [[\"push\", 11], [\"push\", 12], [\"push\", 13], [\"push\", 14]]}  # write-up variant: no restricted tt shapes"
+   },
+   {
+    "old": "_R25B['kc'] = 'A'",
+    "new": "_R25B['kc'] = 'A'; _R25B.pop('s7')"
+   },
+   {
+    "old": "                        fnp.subtract(Cv, fnp.outer(m_, fnp.multiply(m_, eps_)), out=Cv)\n                        mul(Cv, 1.0 / (1.0 + eps_), out=Cv)\n",
+    "new": "                        pass  # mech: the extraction's C' part off\n"
+   }
+  ],
+  "sha256": "03ff5746fbadd769a72b46193218c5e2ff119d1efc9ccf21d1fbb4704f108761"
+ },
+ "est_r38x/v_engine_noxa": {
+  "from": "estimators/r38/r38_sub_x100_s2",
+  "from_sha256": "0d69dc7d0f85065c1c657696c157457b3e208e63f9decf4e7e6d83039c8a5dee",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   },
+   {
+    "old": "                        dA = fnp.subtract(dA, es(\"ia,ia,i->a\", Wn, Wn, kr_))\n",
+    "new": "                        pass  # mech: the extraction's dA part off\n"
+   }
+  ],
+  "sha256": "5c950633f209c2d5bf000b746a56bcf2bfe81030610925c84bfd62c50f123cdd"
+ },
+ "est_r38x/v_engine_nott_noxa": {
+  "from": "estimators/r38/r38_sub_x100_s2",
+  "from_sha256": "0d69dc7d0f85065c1c657696c157457b3e208e63f9decf4e7e6d83039c8a5dee",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   },
+   {
+    "old": "^_SAT_BINS = ",
+    "new": "_SAT_BINS = {\"push\": {\"11\": [0.9375, 0.96875], \"12\": [0.9375, 0.96875], \"13\": [0.9375, 0.96875], \"14\": [0.90625, 0.96875]}, \"tt\": {}, \"skip_plain\": [[\"push\", 11], [\"push\", 12], [\"push\", 13], [\"push\", 14]]}  # write-up variant: no restricted tt shapes"
+   },
+   {
+    "old": "_R25B['kc'] = 'A'",
+    "new": "_R25B['kc'] = 'A'; _R25B.pop('s7')"
+   },
+   {
+    "old": "                        dA = fnp.subtract(dA, es(\"ia,ia,i->a\", Wn, Wn, kr_))\n",
+    "new": "                        pass  # mech: the extraction's dA part off\n"
+   }
+  ],
+  "sha256": "33aa3475c3b9bd2e0d6b3d1a3790656f128ff4c77f76ffb1c820ba6bf23b711b"
+ },
+ "est_r38x/v_engine_noxw": {
+  "from": "estimators/r38/r38_sub_x100_s2",
+  "from_sha256": "0d69dc7d0f85065c1c657696c157457b3e208e63f9decf4e7e6d83039c8a5dee",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   },
+   {
+    "old": "                        fnp.subtract(w1, fnp.outer(mul(v_, 6.0 * eps_), m_), out=w1)\n",
+    "new": "                        pass  # mech: the extraction's w1 part off\n"
+   }
+  ],
+  "sha256": "84554232b58ee43c2975f946bfee8fe86d2eb54fa0f231214795750e55a8a365"
+ },
+ "est_r38x/v_engine_nott_noxw": {
+  "from": "estimators/r38/r38_sub_x100_s2",
+  "from_sha256": "0d69dc7d0f85065c1c657696c157457b3e208e63f9decf4e7e6d83039c8a5dee",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   },
+   {
+    "old": "^_SAT_BINS = ",
+    "new": "_SAT_BINS = {\"push\": {\"11\": [0.9375, 0.96875], \"12\": [0.9375, 0.96875], \"13\": [0.9375, 0.96875], \"14\": [0.90625, 0.96875]}, \"tt\": {}, \"skip_plain\": [[\"push\", 11], [\"push\", 12], [\"push\", 13], [\"push\", 14]]}  # write-up variant: no restricted tt shapes"
+   },
+   {
+    "old": "_R25B['kc'] = 'A'",
+    "new": "_R25B['kc'] = 'A'; _R25B.pop('s7')"
+   },
+   {
+    "old": "                        fnp.subtract(w1, fnp.outer(mul(v_, 6.0 * eps_), m_), out=w1)\n",
+    "new": "                        pass  # mech: the extraction's w1 part off\n"
+   }
+  ],
+  "sha256": "f00a8b9d370f85afd43c42f50899db5b9ea077bf2af2986f02522bb479f2fb86"
+ },
+ "est_r38x/v_engine_noxf": {
+  "from": "estimators/r38/r38_sub_x100_s2",
+  "from_sha256": "0d69dc7d0f85065c1c657696c157457b3e208e63f9decf4e7e6d83039c8a5dee",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   },
+   {
+    "old": "                if x38_:  # r38: the extraction's K3 pair (-6 eps m, w11) in the feed slot",
+    "new": "                if False:  # mech: the extraction's feed pair off; r38: the extraction's K3 pair (-6 eps m, w11) in the feed slot"
+   }
+  ],
+  "sha256": "b68441c73bf9bad981e733207ca75cc78448927d9d0dbbaa773ac8edb53c44c6"
+ },
+ "est_r38x/v_engine_nott_noxf": {
+  "from": "estimators/r38/r38_sub_x100_s2",
+  "from_sha256": "0d69dc7d0f85065c1c657696c157457b3e208e63f9decf4e7e6d83039c8a5dee",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   },
+   {
+    "old": "^_SAT_BINS = ",
+    "new": "_SAT_BINS = {\"push\": {\"11\": [0.9375, 0.96875], \"12\": [0.9375, 0.96875], \"13\": [0.9375, 0.96875], \"14\": [0.90625, 0.96875]}, \"tt\": {}, \"skip_plain\": [[\"push\", 11], [\"push\", 12], [\"push\", 13], [\"push\", 14]]}  # write-up variant: no restricted tt shapes"
+   },
+   {
+    "old": "_R25B['kc'] = 'A'",
+    "new": "_R25B['kc'] = 'A'; _R25B.pop('s7')"
+   },
+   {
+    "old": "                if x38_:  # r38: the extraction's K3 pair (-6 eps m, w11) in the feed slot",
+    "new": "                if False:  # mech: the extraction's feed pair off; r38: the extraction's K3 pair (-6 eps m, w11) in the feed slot"
+   }
+  ],
+  "sha256": "dc4796411e1e34cb7f5e082759412f8e7a6a0b285b0f9cea19a22402978862de"
+ },
+ "est_r38x/v_engine_x05": {
+  "from": "estimators/r38/r38_sub_x100_s2",
+  "from_sha256": "0d69dc7d0f85065c1c657696c157457b3e208e63f9decf4e7e6d83039c8a5dee",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   },
+   {
+    "old": "_X38 = {'on': True, 'scale': 1.0,",
+    "new": "_X38 = {'on': True, 'scale': 0.5,"
+   }
+  ],
+  "sha256": "20b38b5e054b44e4e5a12ef2069e7c6ad623c16a77d7bf6ce680a14e041dc76e"
+ },
+ "est_r38x/v_engine_nott_x05": {
+  "from": "estimators/r38/r38_sub_x100_s2",
+  "from_sha256": "0d69dc7d0f85065c1c657696c157457b3e208e63f9decf4e7e6d83039c8a5dee",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   },
+   {
+    "old": "^_SAT_BINS = ",
+    "new": "_SAT_BINS = {\"push\": {\"11\": [0.9375, 0.96875], \"12\": [0.9375, 0.96875], \"13\": [0.9375, 0.96875], \"14\": [0.90625, 0.96875]}, \"tt\": {}, \"skip_plain\": [[\"push\", 11], [\"push\", 12], [\"push\", 13], [\"push\", 14]]}  # write-up variant: no restricted tt shapes"
+   },
+   {
+    "old": "_R25B['kc'] = 'A'",
+    "new": "_R25B['kc'] = 'A'; _R25B.pop('s7')"
+   },
+   {
+    "old": "_X38 = {'on': True, 'scale': 1.0,",
+    "new": "_X38 = {'on': True, 'scale': 0.5,"
+   }
+  ],
+  "sha256": "0b4d2394db579db4bbd0233263186d05f4a8b2b9cd047c364ca3783ed13c1e30"
+ },
+ "est_r37/mech_nott": {
+  "from": "estimators/k3_fast_aug_sc_2l_b_lc2k_rd_wm_ex35_satrole_fbv8_rsw_cf_sp_d6p_sb2_dc20x_r143bcxa8tv_r24wc10_r25ak4f10L_gA_r25ces_r25bc3e7x_r25agf05_r25aqx_r25av2a_opb30a15_r25av4kd05s3_opi175_opkcA_opslcs_opr30_r36k256_opL4",
+  "from_sha256": "5cce4128344b6e4a47e03f79beac448d217fbe74b7c6d41ccb98ebe9fdb14277",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   },
+   {
+    "old": "^_SAT_BINS = ",
+    "new": "_SAT_BINS = {\"push\": {\"11\": [0.9375, 0.96875], \"12\": [0.9375, 0.96875], \"13\": [0.9375, 0.96875], \"14\": [0.90625, 0.96875]}, \"tt\": {}, \"skip_plain\": [[\"push\", 11], [\"push\", 12], [\"push\", 13], [\"push\", 14]]}  # write-up variant: no restricted tt shapes"
+   },
+   {
+    "old": "_R25B['kc'] = 'A'",
+    "new": "_R25B['kc'] = 'A'; _R25B.pop('s7')"
+   },
+   {
+    "old": "    def _ns(name):\n        return contextlib.nullcontext()\n",
+    "new": "    def _ns(name):\n        return contextlib.nullcontext()\n\n_MECH = None  # research/wu/mech: hook object set by mech_run.py (None: this file computes as its base)\n"
+   },
+   {
+    "old": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n",
+    "new": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n                            if _MECH is not None:  # mech: the fold's share of 3 T^T from the live legs\n                                _MECH.fold(t, h_, g_, QF, mc, ns)\n"
+   },
+   {
+    "old": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n",
+    "new": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n                        if _MECH is not None:  # mech: record and (by mode) replace entries of 3 T^T\n                            _MECH.tt(t, M1, a, Pa, Pb, ord_t, ordb_t, mc, ns,\n                                     (Lr, Ar) if RIt_ is not None else (LEGt[lo:T0 + 2 * ns * n], ASt[lo:T0 + 2 * ns * n]),\n                                     (LEGt[:nth], ASt[:nth]), DGF if K4F is not None else None)\n"
+   }
+  ],
+  "sha256": "abeb1ef1d19edc85e4bb9bc49432367302b604214fbb47d07758549155dc7422"
+ },
+ "est_r38x/mech_nott_noext": {
+  "from": "estimators/r38/r38_sub_x100_s2",
+  "from_sha256": "0d69dc7d0f85065c1c657696c157457b3e208e63f9decf4e7e6d83039c8a5dee",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   },
+   {
+    "old": "^_SAT_BINS = ",
+    "new": "_SAT_BINS = {\"push\": {\"11\": [0.9375, 0.96875], \"12\": [0.9375, 0.96875], \"13\": [0.9375, 0.96875], \"14\": [0.90625, 0.96875]}, \"tt\": {}, \"skip_plain\": [[\"push\", 11], [\"push\", 12], [\"push\", 13], [\"push\", 14]]}  # write-up variant: no restricted tt shapes"
+   },
+   {
+    "old": "_R25B['kc'] = 'A'",
+    "new": "_R25B['kc'] = 'A'; _R25B.pop('s7')"
+   },
+   {
+    "old": "_X38 = {'on': True,",
+    "new": "_X38 = {'on': False,"
+   },
+   {
+    "old": "    def _ns(name):\n        return contextlib.nullcontext()\n",
+    "new": "    def _ns(name):\n        return contextlib.nullcontext()\n\n_MECH = None  # research/wu/mech: hook object set by mech_run.py (None: this file computes as its base)\n"
+   },
+   {
+    "old": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n",
+    "new": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n                            if _MECH is not None:  # mech: the fold's share of 3 T^T from the live legs\n                                _MECH.fold(t, h_, g_, QF, mc, ns)\n"
+   },
+   {
+    "old": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n",
+    "new": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n                        if _MECH is not None:  # mech: record and (by mode) replace entries of 3 T^T\n                            _MECH.tt(t, M1, a, Pa, Pb, ord_t, ordb_t, mc, ns,\n                                     (Lr, Ar) if RIt_ is not None else (LEGt[lo:T0 + 2 * ns * n], ASt[lo:T0 + 2 * ns * n]),\n                                     (LEGt[:nth], ASt[:nth]), DGF if K4F is not None else None)\n"
+   },
+   {
+    "old": "                        fnp.subtract(w1, fnp.outer(mul(v_, 6.0 * eps_), m_), out=w1)\n                if ns:  # old legs (dense, and the bases of compressed ones), u and Z^T rows to the activation side\n",
+    "new": "                        fnp.subtract(w1, fnp.outer(mul(v_, 6.0 * eps_), m_), out=w1)\n                if _MECH is not None:  # mech: this layer's final C' (activation covariance)\n                    _MECH.cov(t, Cv)\n                if ns:  # old legs (dense, and the bases of compressed ones), u and Z^T rows to the activation side\n"
+   }
+  ],
+  "sha256": "42a97b35d6567c16e3cfb6f2f8e8f38a689e827c463eee5ea58d95930d32e2f3"
+ },
+ "est_r38x/mech_nott_lawon": {
+  "from": "estimators/r38/r38_sub_x100_s2",
+  "from_sha256": "0d69dc7d0f85065c1c657696c157457b3e208e63f9decf4e7e6d83039c8a5dee",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   },
+   {
+    "old": "^_SAT_BINS = ",
+    "new": "_SAT_BINS = {\"push\": {\"11\": [0.9375, 0.96875], \"12\": [0.9375, 0.96875], \"13\": [0.9375, 0.96875], \"14\": [0.90625, 0.96875]}, \"tt\": {}, \"skip_plain\": [[\"push\", 11], [\"push\", 12], [\"push\", 13], [\"push\", 14]]}  # write-up variant: no restricted tt shapes"
+   },
+   {
+    "old": "_R25B['kc'] = 'A'",
+    "new": "_R25B['kc'] = 'A'; _R25B.pop('s7')"
+   },
+   {
+    "old": "LMK4 = fnp.array([[1.0], [1.0], [0.0], [0.0]], dtype=f32)  # r38: lam' rows out of the engine's VEC",
+    "new": "LMK4 = fnp.array([[1.0], [1.0], [1.0], [1.0]], dtype=f32)  # mech: lam' rows back in the engine's VEC"
+   },
+   {
+    "old": "LMK6 = fnp.array([[1.0], [1.0], [0.0], [0.0], [1.0], [1.0]], dtype=f32)",
+    "new": "LMK6 = fnp.array([[1.0], [1.0], [1.0], [1.0], [1.0], [1.0]], dtype=f32)  # mech: lam' rows back in"
+   },
+   {
+    "old": "    def _ns(name):\n        return contextlib.nullcontext()\n",
+    "new": "    def _ns(name):\n        return contextlib.nullcontext()\n\n_MECH = None  # research/wu/mech: hook object set by mech_run.py (None: this file computes as its base)\n"
+   },
+   {
+    "old": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n",
+    "new": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n                            if _MECH is not None:  # mech: the fold's share of 3 T^T from the live legs\n                                _MECH.fold(t, h_, g_, QF, mc, ns)\n"
+   },
+   {
+    "old": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n",
+    "new": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n                        if _MECH is not None:  # mech: record and (by mode) replace entries of 3 T^T\n                            _MECH.tt(t, M1, a, Pa, Pb, ord_t, ordb_t, mc, ns,\n                                     (Lr, Ar) if RIt_ is not None else (LEGt[lo:T0 + 2 * ns * n], ASt[lo:T0 + 2 * ns * n]),\n                                     (LEGt[:nth], ASt[:nth]), DGF if K4F is not None else None)\n"
+   },
+   {
+    "old": "                        fnp.subtract(w1, fnp.outer(mul(v_, 6.0 * eps_), m_), out=w1)\n                if ns:  # old legs (dense, and the bases of compressed ones), u and Z^T rows to the activation side\n",
+    "new": "                        fnp.subtract(w1, fnp.outer(mul(v_, 6.0 * eps_), m_), out=w1)\n                if _MECH is not None:  # mech: this layer's final C' (activation covariance)\n                    _MECH.cov(t, Cv)\n                if ns:  # old legs (dense, and the bases of compressed ones), u and Z^T rows to the activation side\n"
+   }
+  ],
+  "sha256": "4deda61699aac886605e49b1862723fa94e61b453e823e05d7ccfd05aaa2c557"
+ },
+ "est_r37/mech_prod": {
+  "from": "estimators/k3_fast_aug_sc_2l_b_lc2k_rd_wm_ex35_satrole_fbv8_rsw_cf_sp_d6p_sb2_dc20x_r143bcxa8tv_r24wc10_r25ak4f10L_gA_r25ces_r25bc3e7x_r25agf05_r25aqx_r25av2a_opb30a15_r25av4kd05s3_opi175_opkcA_opslcs_opr30_r36k256_opL4",
+  "from_sha256": "5cce4128344b6e4a47e03f79beac448d217fbe74b7c6d41ccb98ebe9fdb14277",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   },
+   {
+    "old": "    def _ns(name):\n        return contextlib.nullcontext()\n",
+    "new": "    def _ns(name):\n        return contextlib.nullcontext()\n\n_MECH = None  # research/wu/mech: hook object set by mech_run.py (None: this file computes as its base)\n"
+   },
+   {
+    "old": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n",
+    "new": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n                            if _MECH is not None:  # mech: the fold's share of 3 T^T from the live legs\n                                _MECH.fold(t, h_, g_, QF, mc, ns)\n"
+   },
+   {
+    "old": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n",
+    "new": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n                        if _MECH is not None:  # mech: record and (by mode) replace entries of 3 T^T\n                            _MECH.tt(t, M1, a, Pa, Pb, ord_t, ordb_t, mc, ns,\n                                     (Lr, Ar) if RIt_ is not None else (LEGt[lo:T0 + 2 * ns * n], ASt[lo:T0 + 2 * ns * n]),\n                                     (LEGt[:nth], ASt[:nth]), DGF if K4F is not None else None)\n"
+   }
+  ],
+  "sha256": "2c3e7e70116dd207829357a4fd3f26a1adff569a235b23438ea07b37290d840f"
+ },
+ "est_r38x/mech_prod_noext": {
+  "from": "estimators/r38/r38_sub_x100_s2",
+  "from_sha256": "0d69dc7d0f85065c1c657696c157457b3e208e63f9decf4e7e6d83039c8a5dee",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   },
+   {
+    "old": "_X38 = {'on': True,",
+    "new": "_X38 = {'on': False,"
+   },
+   {
+    "old": "    def _ns(name):\n        return contextlib.nullcontext()\n",
+    "new": "    def _ns(name):\n        return contextlib.nullcontext()\n\n_MECH = None  # research/wu/mech: hook object set by mech_run.py (None: this file computes as its base)\n"
+   },
+   {
+    "old": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n",
+    "new": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n                            if _MECH is not None:  # mech: the fold's share of 3 T^T from the live legs\n                                _MECH.fold(t, h_, g_, QF, mc, ns)\n"
+   },
+   {
+    "old": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n",
+    "new": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n                        if _MECH is not None:  # mech: record and (by mode) replace entries of 3 T^T\n                            _MECH.tt(t, M1, a, Pa, Pb, ord_t, ordb_t, mc, ns,\n                                     (Lr, Ar) if RIt_ is not None else (LEGt[lo:T0 + 2 * ns * n], ASt[lo:T0 + 2 * ns * n]),\n                                     (LEGt[:nth], ASt[:nth]), DGF if K4F is not None else None)\n"
+   },
+   {
+    "old": "                        fnp.subtract(w1, fnp.outer(mul(v_, 6.0 * eps_), m_), out=w1)\n                if ns:  # old legs (dense, and the bases of compressed ones), u and Z^T rows to the activation side\n",
+    "new": "                        fnp.subtract(w1, fnp.outer(mul(v_, 6.0 * eps_), m_), out=w1)\n                if _MECH is not None:  # mech: this layer's final C' (activation covariance)\n                    _MECH.cov(t, Cv)\n                if ns:  # old legs (dense, and the bases of compressed ones), u and Z^T rows to the activation side\n"
+   }
+  ],
+  "sha256": "b6b502cf0cadf5bc7bc7d096c49e0961f32b23eb9325425faa7e48efe3d86ff5"
+ },
+ "est_r38x/mech_prod_lawon": {
+  "from": "estimators/r38/r38_sub_x100_s2",
+  "from_sha256": "0d69dc7d0f85065c1c657696c157457b3e208e63f9decf4e7e6d83039c8a5dee",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   },
+   {
+    "old": "LMK4 = fnp.array([[1.0], [1.0], [0.0], [0.0]], dtype=f32)  # r38: lam' rows out of the engine's VEC",
+    "new": "LMK4 = fnp.array([[1.0], [1.0], [1.0], [1.0]], dtype=f32)  # mech: lam' rows back in the engine's VEC"
+   },
+   {
+    "old": "LMK6 = fnp.array([[1.0], [1.0], [0.0], [0.0], [1.0], [1.0]], dtype=f32)",
+    "new": "LMK6 = fnp.array([[1.0], [1.0], [1.0], [1.0], [1.0], [1.0]], dtype=f32)  # mech: lam' rows back in"
+   },
+   {
+    "old": "    def _ns(name):\n        return contextlib.nullcontext()\n",
+    "new": "    def _ns(name):\n        return contextlib.nullcontext()\n\n_MECH = None  # research/wu/mech: hook object set by mech_run.py (None: this file computes as its base)\n"
+   },
+   {
+    "old": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n",
+    "new": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n                            if _MECH is not None:  # mech: the fold's share of 3 T^T from the live legs\n                                _MECH.fold(t, h_, g_, QF, mc, ns)\n"
+   },
+   {
+    "old": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n",
+    "new": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n                        if _MECH is not None:  # mech: record and (by mode) replace entries of 3 T^T\n                            _MECH.tt(t, M1, a, Pa, Pb, ord_t, ordb_t, mc, ns,\n                                     (Lr, Ar) if RIt_ is not None else (LEGt[lo:T0 + 2 * ns * n], ASt[lo:T0 + 2 * ns * n]),\n                                     (LEGt[:nth], ASt[:nth]), DGF if K4F is not None else None)\n"
+   },
+   {
+    "old": "                        fnp.subtract(w1, fnp.outer(mul(v_, 6.0 * eps_), m_), out=w1)\n                if ns:  # old legs (dense, and the bases of compressed ones), u and Z^T rows to the activation side\n",
+    "new": "                        fnp.subtract(w1, fnp.outer(mul(v_, 6.0 * eps_), m_), out=w1)\n                if _MECH is not None:  # mech: this layer's final C' (activation covariance)\n                    _MECH.cov(t, Cv)\n                if ns:  # old legs (dense, and the bases of compressed ones), u and Z^T rows to the activation side\n"
+   }
+  ],
+  "sha256": "94c69d3092ddd96bcdc10e94b3e4829a2e75b02a70035579beca6a632ba5bf30"
+ },
+ "est_r38x/mech_nott_noxa": {
+  "from": "estimators/r38/r38_sub_x100_s2",
+  "from_sha256": "0d69dc7d0f85065c1c657696c157457b3e208e63f9decf4e7e6d83039c8a5dee",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   },
+   {
+    "old": "^_SAT_BINS = ",
+    "new": "_SAT_BINS = {\"push\": {\"11\": [0.9375, 0.96875], \"12\": [0.9375, 0.96875], \"13\": [0.9375, 0.96875], \"14\": [0.90625, 0.96875]}, \"tt\": {}, \"skip_plain\": [[\"push\", 11], [\"push\", 12], [\"push\", 13], [\"push\", 14]]}  # write-up variant: no restricted tt shapes"
+   },
+   {
+    "old": "_R25B['kc'] = 'A'",
+    "new": "_R25B['kc'] = 'A'; _R25B.pop('s7')"
+   },
+   {
+    "old": "                        dA = fnp.subtract(dA, es(\"ia,ia,i->a\", Wn, Wn, kr_))\n",
+    "new": "                        pass  # mech: the extraction's dA part off\n"
+   },
+   {
+    "old": "    def _ns(name):\n        return contextlib.nullcontext()\n",
+    "new": "    def _ns(name):\n        return contextlib.nullcontext()\n\n_MECH = None  # research/wu/mech: hook object set by mech_run.py (None: this file computes as its base)\n"
+   },
+   {
+    "old": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n",
+    "new": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n                            if _MECH is not None:  # mech: the fold's share of 3 T^T from the live legs\n                                _MECH.fold(t, h_, g_, QF, mc, ns)\n"
+   },
+   {
+    "old": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n",
+    "new": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n                        if _MECH is not None:  # mech: record and (by mode) replace entries of 3 T^T\n                            _MECH.tt(t, M1, a, Pa, Pb, ord_t, ordb_t, mc, ns,\n                                     (Lr, Ar) if RIt_ is not None else (LEGt[lo:T0 + 2 * ns * n], ASt[lo:T0 + 2 * ns * n]),\n                                     (LEGt[:nth], ASt[:nth]), DGF if K4F is not None else None)\n"
+   },
+   {
+    "old": "                        fnp.subtract(w1, fnp.outer(mul(v_, 6.0 * eps_), m_), out=w1)\n                if ns:  # old legs (dense, and the bases of compressed ones), u and Z^T rows to the activation side\n",
+    "new": "                        fnp.subtract(w1, fnp.outer(mul(v_, 6.0 * eps_), m_), out=w1)\n                if _MECH is not None:  # mech: this layer's final C' (activation covariance)\n                    _MECH.cov(t, Cv)\n                if ns:  # old legs (dense, and the bases of compressed ones), u and Z^T rows to the activation side\n"
+   }
+  ],
+  "sha256": "2adcfd2f8c801b18f5fb701f029941322e4d8c786f58cd05264e45a6bf19bb7b"
+ },
+ "est_r38x/mech_prod_noxa": {
+  "from": "estimators/r38/r38_sub_x100_s2",
+  "from_sha256": "0d69dc7d0f85065c1c657696c157457b3e208e63f9decf4e7e6d83039c8a5dee",
+  "replacements": [
+   {
+    "old": "sw_depth_batched=5, kz=4, kq=32, lc: bool = True, law: bool = True, sw_inplace: bool = True,",
+    "new": "sw_depth_batched=5, kz=4, kq=32, lc: bool = False, law: bool = False, sw_inplace: bool = True,"
+   },
+   {
+    "old": "gru: bool = True, gru_law: bool = False, gru_stack: bool = False) -> None:",
+    "new": "gru: bool = False, gru_law: bool = False, gru_stack: bool = False) -> None:"
+   },
+   {
+    "old": "                        dA = fnp.subtract(dA, es(\"ia,ia,i->a\", Wn, Wn, kr_))\n",
+    "new": "                        pass  # mech: the extraction's dA part off\n"
+   },
+   {
+    "old": "    def _ns(name):\n        return contextlib.nullcontext()\n",
+    "new": "    def _ns(name):\n        return contextlib.nullcontext()\n\n_MECH = None  # research/wu/mech: hook object set by mech_run.py (None: this file computes as its base)\n"
+   },
+   {
+    "old": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n",
+    "new": "                            DGF = es(\"sji,sji,sji->i\", QF, g_, h_)  # 3T^T diagonal share / 4\n                            if _MECH is not None:  # mech: the fold's share of 3 T^T from the live legs\n                                _MECH.fold(t, h_, g_, QF, mc, ns)\n"
+   },
+   {
+    "old": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n",
+    "new": "                        if K4F is not None:  # r25a k4f: the diagonal stays the K3 read 3 t3\n                            fnp.fill_diagonal(M1, fnp.subtract(es(\"ii->i\", M1), mul(DGF, 4.0)))\n                        if _MECH is not None:  # mech: record and (by mode) replace entries of 3 T^T\n                            _MECH.tt(t, M1, a, Pa, Pb, ord_t, ordb_t, mc, ns,\n                                     (Lr, Ar) if RIt_ is not None else (LEGt[lo:T0 + 2 * ns * n], ASt[lo:T0 + 2 * ns * n]),\n                                     (LEGt[:nth], ASt[:nth]), DGF if K4F is not None else None)\n"
+   },
+   {
+    "old": "                        fnp.subtract(w1, fnp.outer(mul(v_, 6.0 * eps_), m_), out=w1)\n                if ns:  # old legs (dense, and the bases of compressed ones), u and Z^T rows to the activation side\n",
+    "new": "                        fnp.subtract(w1, fnp.outer(mul(v_, 6.0 * eps_), m_), out=w1)\n                if _MECH is not None:  # mech: this layer's final C' (activation covariance)\n                    _MECH.cov(t, Cv)\n                if ns:  # old legs (dense, and the bases of compressed ones), u and Z^T rows to the activation side\n"
+   }
+  ],
+  "sha256": "396c5f6edc994bd91829536a178e80b7a42479ead7b98264115baf42e39e48cd"
+ }
+}
